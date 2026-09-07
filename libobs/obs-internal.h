@@ -537,6 +537,8 @@ struct obs_core_hotkeys {
 	char *push_to_talk;
 	char *sceneitem_show;
 	char *sceneitem_hide;
+	char *monitor_on;
+	char *monitor_off;
 };
 
 typedef DARRAY(struct obs_source_info) obs_source_info_array_t;
@@ -740,6 +742,7 @@ extern obs_canvas_t *obs_create_main_canvas(void);
 extern void obs_canvas_destroy(obs_canvas_t *canvas);
 extern void obs_canvas_clear_mix(obs_canvas_t *canvas);
 extern void obs_free_canvas_mixes(void);
+extern bool obs_canvas_has_valid_video_info(obs_canvas_t *canvas);
 extern bool obs_canvas_reset_video_internal(obs_canvas_t *canvas, struct obs_video_info *ovi);
 extern void obs_canvas_insert_source(obs_canvas_t *canvas, obs_source_t *source);
 extern void obs_canvas_remove_source(obs_source_t *source);
@@ -990,6 +993,8 @@ struct obs_source {
 	/* audio monitoring */
 	struct audio_monitor *monitor;
 	enum obs_monitoring_type monitoring_type;
+	bool monitoring_enabled;
+	obs_hotkey_pair_id monitor_on_off_key;
 
 	/* media action queue */
 	DARRAY(struct media_action) media_actions;
@@ -1348,6 +1353,14 @@ struct obs_encoder_group {
 
 	uint32_t num_encoders_started;
 	uint64_t start_timestamp;
+
+	uint32_t frame_rate_divisors_lcm;
+
+	uint64_t reconfigure_request;
+	int64_t next_pts;
+	uint32_t encoders_updated_next_pts;
+	uint32_t encoders_reconfigured;
+	bool reconfigure_again;
 };
 
 struct obs_encoder {
@@ -1421,6 +1434,8 @@ struct obs_encoder {
 
 	/* track encoders that are part of a gop-aligned multi track group */
 	struct obs_encoder_group *encoder_group;
+	uint64_t last_reconfigure_request;
+	uint64_t last_handled_reconfigure_request;
 
 	pthread_mutex_t outputs_mutex;
 	DARRAY(obs_output_t *) outputs;

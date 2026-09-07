@@ -36,9 +36,25 @@ add_obs_plugin(
     PLATFORMS WINDOWS MACOS LINUX
     WITH_MESSAGE
 )
+add_obs_plugin(aja-output-ui PLATFORMS WINDOWS MACOS LINUX WITH_MESSAGE)
 add_obs_plugin(coreaudio-encoder PLATFORMS WINDOWS MACOS)
 add_obs_plugin(
     decklink
+    PLATFORMS WINDOWS MACOS LINUX
+    WITH_MESSAGE
+)
+add_obs_plugin(
+    decklink-captions
+    PLATFORMS WINDOWS MACOS LINUX
+    WITH_MESSAGE
+)
+add_obs_plugin(
+    decklink-output-ui
+    PLATFORMS WINDOWS MACOS LINUX
+    WITH_MESSAGE
+)
+add_obs_plugin(
+    frontend-tools
     PLATFORMS WINDOWS MACOS LINUX
     WITH_MESSAGE
 )
@@ -61,7 +77,7 @@ check_obs_browser()
 add_obs_plugin(obs-ffmpeg)
 add_obs_plugin(obs-filters)
 add_obs_plugin(obs-libfdk)
-add_obs_plugin(obs-nvenc PLATFORMS WINDOWS LINUX ARCHITECTURES x64 x86_64)
+add_obs_plugin(obs-nvenc PLATFORMS WINDOWS LINUX)
 add_obs_plugin(obs-outputs)
 add_obs_plugin(
     obs-qsv11

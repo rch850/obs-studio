@@ -21,6 +21,9 @@
 #include <QStyle>
 #include <QWidget>
 
+class QAbstractButton;
+class QLabel;
+
 namespace idian {
 
 // Helpers for OBS Idian widgets
@@ -48,11 +51,7 @@ public:
 	}
 
 	void repolish() { repolish(parent); }
-	static void repolish(QWidget *widget)
-	{
-		widget->style()->unpolish(widget);
-		widget->style()->polish(widget);
-	}
+	static void repolish(QWidget *widget) { widget->style()->polish(widget); }
 
 	// Adds a style class to the widget
 	void addClass(const QString &classname) { addClass(parent, classname); }
@@ -118,7 +117,8 @@ public:
 		}
 	}
 
-	static void applyColorToIcon(QWidget *widget);
+	static void applyColorToIcon(QAbstractButton *button);
+	static void applyColorToIcon(QLabel *label);
 
 	static QPixmap recolorPixmap(const QPixmap &src, const QColor &color);
 
