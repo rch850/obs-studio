@@ -2286,7 +2286,6 @@
                 "profile": "baseline",
                 "keyint": 2,
                 "bframes": 0,
-                "x264opts": "scenecut=0: sliced-threads=0: preset=veryfast: tune=zerolatency",
                 "max video bitrate": 6000,
                 "max audio bitrate": 192
             }
