@@ -2266,7 +2266,9 @@
         },
         {
             "name": "Whowatch (ふわっち)",
-            "supported video codecs": ["h264"],
+            "supported video codecs": [
+                "h264"
+            ],
             "more_info_link": "https://whowatch.tv/help/encoder",
             "stream_key_link": "https://whowatch.tv/publish",
             "servers": [
